@@ -1,21 +1,26 @@
 package bg.softuni.student;
 
 import bg.softuni.student.model.Student;
-import bg.softuni.student.repository.FileStudentRepository;
+import bg.softuni.student.repository.CompountStudentRepository;
 import bg.softuni.student.repository.StudentRepository;
 
 import java.time.LocalDate;
 import java.util.Comparator;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
+@Service
 public class StudentServiceImpl implements StudentService {
-
     private final StudentRepository studentRepository;
 
-    public StudentServiceImpl() {
+    public StudentServiceImpl(StudentRepository studentRepository) {
         // we may pass this
-        this.studentRepository = new FileStudentRepository();
+        this.studentRepository = studentRepository;
     }
 
     @Override
