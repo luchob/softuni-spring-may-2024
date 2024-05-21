@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
 
 <head>
       <meta charset="UTF-8">
@@ -67,59 +68,62 @@
 
 <div class="container">
     <h2 class="text-center text-white">Register User</h2>
-    <form method="POST" 
+    <form th:method="post"
+          th:action="@{/users/register}"
           class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
         <div class="row">
             <div class="form-group col-md-6 mb-3">
                 <label for="firstName" class="text-white font-weight-bold">First Name</label>
-                <input  id="firstName" type="text" min="2" max="20" class="form-control"
+                <input  id="firstName"
+                        name="firstName"
+                        type="text"
+                        class="form-control"
                        placeholder="First name"/>
-                <p class="errors alert alert-danger">
-                    First name is required.
-                </p>
+<!--                <p class="errors alert alert-danger">-->
+<!--                    First name is required.-->
+<!--                </p>-->
             </div>
             <div class="form-group col-md-6 mb-3">
                 <label for="lastName" class="text-white font-weight-bold">Last Name</label>
-                <input id="lastName" type="text" min="2" max="20" class="form-control"
+                <input id="lastName"
+                       type="text"
+                       name="lastName"
+                       class="form-control"
                        placeholder="First name"/>
-                <p class="errors alert alert-danger">
-                    Last name is required.
-                </p>
+<!--                <p class="errors alert alert-danger">-->
+<!--                    Last name is required.-->
+<!--                </p>-->
             </div>
         </div>
         <div class="row">
             <div class="form-group col-md-6 mb-3">
-                <label for="username" class="text-white font-weight-bold">Username</label>
-                <input id="username" type="text" min="2" max="20" class="form-control"
-                       placeholder="First name"/>
-                <p class="errors alert alert-danger">
-                    Username is required.
-                </p>
+                <label for="email" class="text-white font-weight-bold">Email</label>
+                <input id="email"
+                       name="email"
+                       type="email"
+                       class="form-control"
+                       placeholder="Email"/>
+<!--                <p class="errors alert alert-danger">-->
+<!--                    Email is required.-->
+<!--                </p>-->
             </div>
             <div class="form-group col-md-6 mb-3">
                 <label for="password" class="text-white font-weight-bold">Password</label>
-                <input id="password" type="password" min="2" max="20" class="form-control"
+                <input id="password"
+                       type="password"
+                       name="password"
+                       class="form-control"
                        placeholder="Password"/>
-                <p class="errors alert alert-danger">
-                    Password is required.
-                </p>
+<!--                <p class="errors alert alert-danger">-->
+<!--                    Password is required.-->
+<!--                </p>-->
             </div>
-        </div>
-        <div class="form-group">
-            <label class="text-center text-white font-weight-bold" for="roles">Roles</label>
-            <select  id="roles" class="form-control" multiple>
-                <option>
-                </option>
-            </select>
-            <p class="errors alert alert-danger">
-                Selecting a role is required.
-            </p>
         </div>
 
         <div class="row">
             <div class="col col-md-4">
                 <div class="button-holder d-flex">
-                    <input type="submit" class="btn btn-info btn-lg" value="Submit Offer"/>
+                    <input type="submit" class="btn btn-info btn-lg" value="Create user"/>
                 </div>
             </div>
         </div>
