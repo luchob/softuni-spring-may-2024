@@ -1,0 +1,9 @@
+spring:
+  application.name: mobilele
+  thymeleaf:
+    check-template-location: true
+    cache: false
+    prefix: file:./src/main/resources/templates/
+  resources:
+    static-locations: file:./src/main/resources/static/
+    cache-period: 0
