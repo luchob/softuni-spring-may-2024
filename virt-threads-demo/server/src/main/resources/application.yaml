@@ -1,0 +1,15 @@
+spring.application.name: server
+spring:
+  threads:
+    virtual:
+      enabled: true
+server:
+  tomcat:
+    max-connections: 50000
+    accept-count: 2000
+    threads:
+      max: 30
+
+#logging:
+#  level:
+#    org.apache: DEBUG

@@ -1,0 +1,7 @@
+server:
+  port: 9001
+
+spring:
+  threads:
+    virtual:
+      enabled: true
