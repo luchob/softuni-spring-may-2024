@@ -142,7 +142,7 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <p class="form-group">
             <label class="text-white font-weight-bold"
                    th:for="description">Description</label>
             <textarea
@@ -159,13 +159,12 @@
                    th:errors="*{description}" class="text-danger"> Name error
             </p>
 
-            <p th:if="${#fields.hasErrors('description')}">
-                <ul>
-                    <li th:each="err : ${#fields.errors('description')}" th:text="${err}" />
-                </ul>
+            <p th:if="${#fields.hasErrors('description')}" class="invalid-feedback errors alert alert-danger">
+                <th:block th:each="err : ${#fields.errors('description')}">
+                    <th:block th:text="${err}"></th:block>
+                </th:block>
             </p>
 
-        </div>
         <div class="form-group">
             <label class="text-white font-weight-bold" for="imageUrl">Image URL</label>
             <input id="imageUrl" type="url" class="form-control"
