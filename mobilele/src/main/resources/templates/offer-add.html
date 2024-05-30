@@ -159,6 +159,12 @@
                    th:errors="*{description}" class="text-danger"> Name error
             </p>
 
+            <p th:if="${#fields.hasErrors('description')}">
+                <ul>
+                    <li th:each="err : ${#fields.errors('description')}" th:text="${err}" />
+                </ul>
+            </p>
+
         </div>
         <div class="form-group">
             <label class="text-white font-weight-bold" for="imageUrl">Image URL</label>
