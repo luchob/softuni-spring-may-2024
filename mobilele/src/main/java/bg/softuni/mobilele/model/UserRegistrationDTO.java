@@ -5,4 +5,8 @@ public record UserRegistrationDTO(String firstName,
                                   String password,
                                   String email) {
 
+  public static UserRegistrationDTO empty() {
+    return new UserRegistrationDTO(null, null, null, null);
+  }
+
 }

@@ -68,17 +68,19 @@
 
 <div class="container">
     <h2 class="text-center text-white">Register User</h2>
-    <form th:method="post"
-          th:action="@{/users/register}"
+    <form
+            th:object="${userRegistrationDTO}"
+            th:method="post"
+            th:action="@{/users/register}"
           class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
         <div class="row">
             <div class="form-group col-md-6 mb-3">
-                <label for="firstName" class="text-white font-weight-bold">First Name</label>
-                <input  id="firstName"
-                        name="firstName"
-                        type="text"
-                        class="form-control"
-                       placeholder="First name"/>
+                <label th:for="firstName" class="text-white font-weight-bold">First Name</label>
+                <input
+                    type="text"
+                    th:field="*{firstName}"
+                    class="form-control"
+                    placeholder="First name"/>
 <!--                <p class="errors alert alert-danger">-->
 <!--                    First name is required.-->
 <!--                </p>-->
