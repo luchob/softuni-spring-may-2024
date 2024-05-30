@@ -68,7 +68,10 @@
 
 <div class="container">
     <h2 class="text-center text-white">Upload Offer</h2>
-    <form method="POST" 
+    <form
+        th:action="@{/offers/add}"
+        th:method="post"
+        th:object="${addOfferDTO}"
           class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
         <div class="row">
 
@@ -95,14 +98,20 @@
         </div>
         <div class="row">
             <div class="form-group col-md-6 mb-3">
-                <label class="text-center text-white font-weight-bold" for="engine">Engine</label>
-                <select id="engine" class="form-control">
+                <label class="text-center text-white font-weight-bold" th:for="engineType">Engine</label>
+                <select th:field="*{engineType}"
+                        th:errorclass="is-invalid"
+                        class="form-control">
                     <option value="">- Select engine type -</option>
-                    <option>
-                        Engine type
+                    <option th:each="type: ${allEngineTypes}"
+                            th:value="${type}"
+                            th:text="${type}">
+                        IMAGINARY ENGINE
                     </option>
+
                 </select>
-                <p class="errors alert alert-danger">
+
+                <p class="invalid-feedback errors alert alert-danger">
                     Engine type is required.
                 </p>
             </div>
@@ -128,23 +137,39 @@
                 </p>
             </div>
             <div class="form-group col-md-6 mb-3">
-                <label for="mileage" class="text-white font-weight-bold">Mileage</label>
-                <input id="mileage" type="number" min="0" max="900000" step="1000"
+                <label th:for="mileage" class="text-white font-weight-bold">Mileage</label>
+                <input th:field="*{mileage}"
+                       type="number"
+                       th:errorclass="is-invalid"
                        class="form-control"
                        placeholder="Mileage in kilometers"/>
-                <p class="errors alert alert-danger">
-                    Mileage in kilometers is required.
+                <p class="invalid-feedback errors alert alert-danger">
+                    Valid mileage in kilometers is required.
                 </p>
             </div>
         </div>
 
         <div class="form-group">
-            <label class="text-white font-weight-bold" for="description">Description</label>
-            <textarea id="description" type="textarea" class="form-control" rows="3"
-                      placeholder="Description"></textarea>
-            <p class="errors alert alert-danger">
-                Description is required.
+            <label class="text-white font-weight-bold" th:for="description">Description</label>
+            <textarea
+                th:field="*{description}"
+                th:errorclass="is-invalid"
+                type="textarea"
+                class="form-control"
+                rows="3"
+                placeholder="Description">
+            </textarea>
+            <p class="invalid-feedback errors alert alert-danger">
+                Description is required and should be at least 5 symbols.
             </p>
+
+<!--            <small th:each="err : ${#fields.errors('description')}" th:text="${err}" class="text-danger"></small>-->
+
+<!--            Alternative error display-->
+<!--            <small th:errors="*{description}" class="text-danger">Description error-->
+<!--            </small>-->
+
+
         </div>
         <div class="form-group">
             <label class="text-white font-weight-bold" for="imageUrl">Image URL</label>
