@@ -49,9 +49,9 @@ public class UserServiceImpl implements UserService {
   private UserEntity userEntity(UserRegistrationDTO userRegistration) {
     return new UserEntity()
         .setActive(true)
-        .setEmail(userRegistration.email())
-        .setFirstName(userRegistration.firstName())
-        .setLastName(userRegistration.lastName())
-        .setPassword(passwordEncoder.encode(userRegistration.password()));
+        .setEmail(userRegistration.getEmail())
+        .setFirstName(userRegistration.getFirstName())
+        .setLastName(userRegistration.getLastName())
+        .setPassword(passwordEncoder.encode(userRegistration.getPassword()));
   }
 }

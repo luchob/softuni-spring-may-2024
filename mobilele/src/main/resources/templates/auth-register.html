@@ -20,6 +20,7 @@
     <h2 class="text-center text-white">Register User</h2>
     <form th:method="post"
           th:action="@{/users/register}"
+          th:object="${registerDTO}"
           class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
         <div class="row">
             <div class="form-group col-md-6 mb-3">
@@ -47,26 +48,41 @@
         </div>
         <div class="row">
             <div class="form-group col-md-6 mb-3">
-                <label for="email" class="text-white font-weight-bold">Email</label>
-                <input id="email"
-                       name="email"
+                <label th:for="email" class="text-white font-weight-bold">Email</label>
+                <input th:field="*{email}"
                        type="email"
                        class="form-control"
                        placeholder="Email"/>
-<!--                <p class="errors alert alert-danger">-->
-<!--                    Email is required.-->
-<!--                </p>-->
+                <p class="invalid-feedback errors alert alert-danger">
+                    Passwords should be provided and should match!
+                </p>
             </div>
             <div class="form-group col-md-6 mb-3">
-                <label for="password" class="text-white font-weight-bold">Password</label>
-                <input id="password"
+                <label th:for="password" class="text-white font-weight-bold">Password</label>
+                <input th:field="*{password}"
                        type="password"
-                       name="password"
+                       th:errorclass="is-invalid"
                        class="form-control"
                        placeholder="Password"/>
-<!--                <p class="errors alert alert-danger">-->
-<!--                    Password is required.-->
-<!--                </p>-->
+                <p class="invalid-feedback errors alert alert-danger">
+                    Passwords should be provided and should match!
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md-6 mb-3">
+                <label th:for="passwordConfirm" class="text-white font-weight-bold">Confirm Password</label>
+                <input
+                       type="password"
+                       th:field="*{passwordConfirm}"
+                       th:errorclass="is-invalid"
+                       class="form-control"
+                       placeholder="Password"/>
+                <p class="invalid-feedback errors alert alert-danger">
+                    Passwords should be provided and should match!
+                </p>
+                <small th:each="err : ${#fields.errors('passwordConfirm')}" th:text="${err}" class="text-danger"></small>
             </div>
         </div>
 
