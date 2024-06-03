@@ -16,11 +16,15 @@
 
 <div class="container">
     <h2 class="text-center text-white">Login</h2>
-    <form method="POST" 
+    <form th:method="post"
+          th:actipn="@{/users/login}"
+          th:object="${loginDTO}"
           class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
         <div class="form-group">
-            <label for="username" class="text-white font-weight-bold">Username</label>
-            <input value="username" id="username" name="username" type="text" min="2" max="50"
+            <label th:for="email" class="text-white font-weight-bold">Email</label>
+            <input
+                th:field="*{email}"
+                    type="text"
                    class="form-control"
                    placeholder="Username"/>
         </div>

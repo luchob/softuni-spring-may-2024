@@ -2,7 +2,6 @@ package bg.softuni.mobilele.service.impl;
 
 import bg.softuni.mobilele.model.AddOfferDTO;
 import bg.softuni.mobilele.model.OfferDetailsDTO;
-import bg.softuni.mobilele.model.entity.OfferEntity;
 import bg.softuni.mobilele.model.mapper.OfferMapper;
 import bg.softuni.mobilele.repository.OfferRepository;
 import bg.softuni.mobilele.service.OfferService;
