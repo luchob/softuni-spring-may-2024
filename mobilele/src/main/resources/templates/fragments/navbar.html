@@ -11,6 +11,7 @@
 </head>
 
 <body>
+
 <div th:fragment="navbar(activeLink)">
 
   <nav class="navbar navbar-expand-lg bg-dark navbar-dark fixed-top">
@@ -44,7 +45,7 @@
             <a class="dropdown-item" href="/">Something else here</a>
           </div>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" th:if="${@currentUser.isLoggedIn()}">
           <div class="form-inline my-2 my-lg-0 border px-3">
             <div class="logged-user"
                  text="Welcome, Gosho"></div>
@@ -52,11 +53,11 @@
           </div>
         </li>
 
-        <li class="nav-item">
+        <li class="nav-item" th:unless="${@currentUser.isLoggedIn()}">
           <a class="nav-link" href="/users/register"
              th:classappend="${activeLink == 'register'}? 'active'">Register</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" th:unless="${@currentUser.isLoggedIn()}">
           <a class="nav-link" href="/users/login"
              th:classappend="${activeLink == 'login'}? 'active'">
             Login
@@ -68,7 +69,6 @@
   </nav>
 
 </div>
-
 
 </body>
 </html>
