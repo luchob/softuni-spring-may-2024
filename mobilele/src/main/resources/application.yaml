@@ -23,3 +23,7 @@ spring:
   sql:
     init:
       mode: never
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true

@@ -2,9 +2,11 @@ package bg.softuni.mobilele.service.impl;
 
 import bg.softuni.mobilele.model.AddOfferDTO;
 import bg.softuni.mobilele.model.OfferDetailsDTO;
+import bg.softuni.mobilele.model.OfferSummaryDTO;
 import bg.softuni.mobilele.model.entity.OfferEntity;
 import bg.softuni.mobilele.repository.OfferRepository;
 import bg.softuni.mobilele.service.OfferService;
+import java.util.List;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -30,6 +32,28 @@ public class OfferServiceImpl implements OfferService {
         .orElseThrow();
   }
 
+  @Override
+  public List<OfferSummaryDTO> getAllOffers() {
+
+    return offerRepository
+        .findAll()
+        .stream()
+        .map(OfferServiceImpl::toOfferSummaryDTO)
+        .toList();
+  }
+
+  @Override
+  public void delete(Long offerId) {
+    offerRepository.deleteById(offerId);
+  }
+
+  private static OfferSummaryDTO toOfferSummaryDTO(OfferEntity offerEntity) {
+    return new OfferSummaryDTO(
+        offerEntity.getId(),
+        offerEntity.getDescription()
+    );
+
+  }
   private static OfferDetailsDTO toOfferDetails(OfferEntity offerEntity) {
     // todo use mapping library
     return new OfferDetailsDTO(offerEntity.getId(),
