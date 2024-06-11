@@ -65,4 +65,9 @@ public class UserServiceImpl implements UserService {
 
     return mappedEntity;
   }
+
+  @Override
+  public void logout() {
+    currentUser.clean();
+  }
 }

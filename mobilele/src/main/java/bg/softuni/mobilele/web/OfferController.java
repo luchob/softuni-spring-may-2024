@@ -7,8 +7,10 @@ import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -17,10 +19,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @RequestMapping("/offers")
 public class OfferController {
 
-  private final OfferService orderService;
+  private final OfferService offerService;
 
-  public OfferController(OfferService orderService) {
-    this.orderService = orderService;
+  public OfferController(OfferService offerService) {
+    this.offerService = offerService;
   }
 
   @ModelAttribute("allEngineTypes")
@@ -51,8 +53,25 @@ public class OfferController {
     }
 
 
-    long newOfferId = orderService.createOrder(addOfferDTO);
+    long newOfferId = offerService.createOffer(addOfferDTO);
 
     return "redirect:/offers/" + newOfferId;
+  }
+
+  @GetMapping("/{id}")
+  public String offerDetails(@PathVariable("id") Long id,
+      Model model) {
+
+    model.addAttribute("offerDetails", offerService.getOfferDetails(id));
+
+    return "details";
+  }
+
+  @DeleteMapping("/{id}")
+  public String deleteOffer(@PathVariable("id") Long id) {
+
+    offerService.deleteOffer(id);
+
+    return "redirect:/offers/all";
   }
 }
