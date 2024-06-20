@@ -8,12 +8,15 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import java.math.BigDecimal;
 
 @Entity
 @Table(name = "offers")
 public class OfferEntity extends BaseEntity {
 
   private String description;
+
+  private BigDecimal price;
 
   private Integer mileage;
 
@@ -44,6 +47,15 @@ public class OfferEntity extends BaseEntity {
 
   public OfferEntity setEngine(EngineTypeEnum engine) {
     this.engine = engine;
+    return this;
+  }
+
+  public BigDecimal getPrice() {
+    return price;
+  }
+
+  public OfferEntity setPrice(BigDecimal price) {
+    this.price = price;
     return this;
   }
 }

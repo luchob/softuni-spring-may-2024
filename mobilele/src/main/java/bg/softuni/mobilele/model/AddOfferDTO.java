@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
 import jakarta.validation.constraints.Size;
+import java.math.BigDecimal;
 
 public record AddOfferDTO(
     @NotEmpty(message = "{add.offer.description.not.empty}")
@@ -12,11 +13,12 @@ public record AddOfferDTO(
         min = 5,
         max = 500) String description,//not necessarily from message source
     @NotNull @PositiveOrZero Integer mileage,
-    @NotNull EngineTypeEnum engineType
+    @NotNull EngineTypeEnum engineType,
+    @NotNull @PositiveOrZero BigDecimal price
 ) {
 
   public static AddOfferDTO empty() {
-    return new AddOfferDTO(null, null, null);
+    return new AddOfferDTO(null, null, null, null);
   }
 
 }

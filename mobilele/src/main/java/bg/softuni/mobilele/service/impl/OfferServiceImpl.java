@@ -60,7 +60,8 @@ public class OfferServiceImpl implements OfferService {
     return new OfferDetailsDTO(offerEntity.getId(),
         offerEntity.getDescription(),
         offerEntity.getMileage(),
-        offerEntity.getEngine());
+        offerEntity.getEngine(),
+        offerEntity.getPrice());
   }
 
   private static OfferEntity map(AddOfferDTO addOfferDTO) {
@@ -68,6 +69,7 @@ public class OfferServiceImpl implements OfferService {
     return new OfferEntity()
         .setDescription(addOfferDTO.description())
         .setEngine(addOfferDTO.engineType())
-        .setMileage(addOfferDTO.mileage());
+        .setMileage(addOfferDTO.mileage())
+        .setPrice(addOfferDTO.price());
   }
 }

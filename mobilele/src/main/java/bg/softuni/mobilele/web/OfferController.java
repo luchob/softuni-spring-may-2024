@@ -2,6 +2,7 @@ package bg.softuni.mobilele.web;
 
 import bg.softuni.mobilele.model.AddOfferDTO;
 import bg.softuni.mobilele.model.enums.EngineTypeEnum;
+import bg.softuni.mobilele.service.ExRateService;
 import bg.softuni.mobilele.service.OfferService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
@@ -20,9 +21,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class OfferController {
 
   private final OfferService offerService;
+  private final ExRateService exRateService;
 
-  public OfferController(OfferService offerService) {
+  public OfferController(OfferService offerService,
+      ExRateService exRateService) {
     this.offerService = offerService;
+    this.exRateService = exRateService;
   }
 
   @ModelAttribute("allEngineTypes")
@@ -62,6 +66,7 @@ public class OfferController {
   public String offerDetails(@PathVariable("id") Long id,
       Model model) {
 
+    model.addAttribute("allCurrencies", exRateService.getAllSupportedCurrencties());
     model.addAttribute("offerDetails", offerService.getOfferDetails(id));
 
     return "details";

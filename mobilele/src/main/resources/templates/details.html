@@ -29,13 +29,25 @@
             </div>
             <ul class="offer-details list-group list-group-flush">
                 <li class="list-group-item">
-                    <div class="card-text">• Mileage <span th:text="*{mileage}">Mileage</span></div>
-                    <div class="card-text"><span>Price</span></div>
-                    <div class="card-text">• Engine type <span th:text="*{engineType}">Engine type</span></div>
+                    <div class="card-text">• <em>Mileage</em> <span th:text="*{mileage}">4324</span></div>
+                    <div class="card-text">• <em>Price</em> <span id="price" th:text="*{price}">1234</span></div>
+                    <div class="card-text">• <em>Engine type</em> <span th:text="*{engineType}">Engine type</span></div>
                     <div class="card-text"><span>• Transmission type</span></div>
                     <div class="card-text"><span>• Offer created</span></div>
                     <div class="card-text"><span>• Offer modified</span></div>
                     <div class="card-text"><span>• Seller - First and Last name</span></div>
+
+                    <input type="hidden" id="priceInBGN" th:value="*{price}">
+                    <div class="card-text">• <em>Currency</em>
+                        <select id="currency">
+                            <option
+                                th:each="currency : ${allCurrencies}"
+                                th:value="${currency}"
+                                th:selected="${currency} == 'BGN'">
+                                <th:block th:text="${currency}"></th:block>
+                            </option>
+                        </select>
+                    </div>
                 </li>
             </ul>
             <div class="card-body">
@@ -52,6 +64,8 @@
         </div>
     </div>
 </div>
+
+<script th:src="@{/js/currency.js}"></script>
 
 <div>
              <footer> </footer>
