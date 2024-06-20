@@ -1,5 +1,8 @@
 package bg.softuni.hateoas.dto;
 
+import org.springframework.hateoas.server.core.Relation;
+
+@Relation(collectionRelation = "orders")
 public class OrderDTO {
 
   private Long studentId;

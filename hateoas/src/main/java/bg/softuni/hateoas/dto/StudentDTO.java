@@ -1,5 +1,7 @@
 package bg.softuni.hateoas.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import java.util.List;
 import org.springframework.hateoas.server.core.Relation;
 
@@ -11,6 +13,7 @@ public class StudentDTO {
   private int age;
   private boolean deleted;
 
+  @JsonInclude(Include.NON_NULL)
   private List<OrderDTO> orders;
 
   public Long getId() {

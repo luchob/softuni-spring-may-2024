@@ -35,7 +35,8 @@ public class StudentService {
 
   private StudentDTO map(StudentEntity entity) {
 
-    var orders = entity.
+    var orders =
+        entity.
         getOrders().
         stream().
         map(this::map).
@@ -46,7 +47,7 @@ public class StudentService {
         setDeleted(entity.isDeleted()).
         setId(entity.getId()).
         setName(entity.getName()).
-        setOrders(orders);
+        setOrders(orders.isEmpty() ? null : orders);
   }
 
   private OrderDTO map(OrderEntity entity) {
