@@ -7,6 +7,7 @@ public record OfferDetailsDTO(Long id,
                               String description,
                               Integer mileage,
                               EngineTypeEnum engineType,
-                              BigDecimal price) {
+                              BigDecimal price,
+                              String seller) {
 
 }

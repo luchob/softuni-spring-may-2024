@@ -3,9 +3,12 @@ package bg.softuni.mobilele.service.impl;
 import bg.softuni.mobilele.model.UserLoginDTO;
 import bg.softuni.mobilele.model.UserRegistrationDTO;
 import bg.softuni.mobilele.model.entity.UserEntity;
+import bg.softuni.mobilele.model.entity.UserRoleEntity;
+import bg.softuni.mobilele.model.enums.UserRoleEnum;
 import bg.softuni.mobilele.repository.UserRepository;
-import bg.softuni.mobilele.service.CurrentUser;
+import bg.softuni.mobilele.repository.UserRoleRepository;
 import bg.softuni.mobilele.service.UserService;
+import java.util.List;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -16,46 +19,26 @@ public class UserServiceImpl implements UserService {
   private final ModelMapper modelMapper;
   private final PasswordEncoder passwordEncoder;
   private final UserRepository userRepository;
-  private final CurrentUser currentUser;
+  private final UserRoleRepository userRoleRepository;
 
   public UserServiceImpl(ModelMapper modelMapper,
       PasswordEncoder passwordEncoder,
       UserRepository userRepository,
-      CurrentUser currentUser) {
+      UserRoleRepository userRoleRepository) {
     this.modelMapper = modelMapper;
     this.passwordEncoder = passwordEncoder;
     this.userRepository = userRepository;
-    this.currentUser = currentUser;
+    this.userRoleRepository = userRoleRepository;
   }
 
   @Override
   public void registerUser(UserRegistrationDTO userRegistration) {
-    userRepository.save(map(userRegistration));
-  }
 
-  @Override
-  public boolean login(UserLoginDTO userLoginDTO) {
+    UserEntity newUser = map(userRegistration);
 
-    UserEntity userEntity = userRepository
-        .findByEmail(userLoginDTO.email())
-        .orElse(null);
+    newUser.setRoles(List.of(userRoleRepository.findByRole(UserRoleEnum.USER).orElseThrow()));
 
-    if (userLoginDTO.password() == null ||
-        userEntity == null ||
-        userEntity.getPassword() == null) {
-      return false;
-    }
-
-    boolean success = passwordEncoder.matches(userLoginDTO.password(), userEntity.getPassword());
-
-    if (success) {
-      currentUser.setLoggedIn(true);
-      currentUser.setFullName(userEntity.getFirstName() + " " + userEntity.getLastName());
-    } else {
-      currentUser.clean();
-    }
-
-    return false;
+    userRepository.save(newUser);
   }
 
   private UserEntity map(UserRegistrationDTO userRegistrationDTO) {
@@ -64,10 +47,5 @@ public class UserServiceImpl implements UserService {
     mappedEntity.setPassword(passwordEncoder.encode(userRegistrationDTO.getPassword()));
 
     return mappedEntity;
-  }
-
-  @Override
-  public void logout() {
-    currentUser.clean();
   }
 }

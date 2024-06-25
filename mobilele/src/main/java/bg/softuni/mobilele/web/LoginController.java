@@ -2,8 +2,11 @@ package bg.softuni.mobilele.web;
 
 import bg.softuni.mobilele.model.UserLoginDTO;
 import bg.softuni.mobilele.service.UserService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -22,18 +25,11 @@ public class LoginController {
     return "auth-login";
   }
 
-  @PostMapping("/login")
-  public String login(UserLoginDTO userLoginDTO) {
-    userService.login(userLoginDTO);
-
-    return "redirect:/";
-  }
-
-  @PostMapping("/logout")
-  public String logout() {
-
-    userService.logout();
-
-    return "redirect:/";
+  @PostMapping("/login-error")
+  public String loginError(
+      Model model,
+      @ModelAttribute("email") String email
+  ) {
+    return "auth-login";
   }
 }

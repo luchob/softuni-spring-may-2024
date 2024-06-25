@@ -13,7 +13,6 @@ spring:
     username: root
     password:
   jpa:
-    database-platform: org.hibernate.dialect.MySQLDialect
     defer-datasource-initialization: true
     properties:
       hibernate:
@@ -33,3 +32,9 @@ forex:
     key: ${FOREX_API_KEY:}
     url: "https://openexchangerates.org/api/latest.json?app_id={app_id}&prettyprint=false&show_alternative=false"
     base: "USD"
+
+logging:
+  level:
+    org.hibernate.SQL: DEBUG
+    org.hibernate.orm.jdbc.bind: TRACE
+#    org.springframework.security: DEBUG

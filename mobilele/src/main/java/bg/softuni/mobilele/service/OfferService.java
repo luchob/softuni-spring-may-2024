@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface OfferService {
 
-  long createOffer(AddOfferDTO addOfferDTO);
+  long createOffer(AddOfferDTO addOfferDTO, String sellerEmail);
 
   void deleteOffer(long orderId);
 

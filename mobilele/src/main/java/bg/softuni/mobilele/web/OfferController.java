@@ -5,6 +5,8 @@ import bg.softuni.mobilele.model.enums.EngineTypeEnum;
 import bg.softuni.mobilele.service.ExRateService;
 import bg.softuni.mobilele.service.OfferService;
 import jakarta.validation.Valid;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -48,7 +50,8 @@ public class OfferController {
   public String createOffer(
       @Valid AddOfferDTO addOfferDTO,
       BindingResult bindingResult,
-      RedirectAttributes rAtt) {
+      RedirectAttributes rAtt,
+      @AuthenticationPrincipal UserDetails currentUser) {
 
     if(bindingResult.hasErrors()){
       rAtt.addFlashAttribute("addOfferDTO", addOfferDTO);
@@ -57,7 +60,7 @@ public class OfferController {
     }
 
 
-    long newOfferId = offerService.createOffer(addOfferDTO);
+    long newOfferId = offerService.createOffer(addOfferDTO, currentUser.getUsername());
 
     return "redirect:/offers/" + newOfferId;
   }

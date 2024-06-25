@@ -5,6 +5,7 @@ import bg.softuni.mobilele.model.OfferDetailsDTO;
 import bg.softuni.mobilele.model.OfferSummaryDTO;
 import bg.softuni.mobilele.model.entity.OfferEntity;
 import bg.softuni.mobilele.repository.OfferRepository;
+import bg.softuni.mobilele.repository.UserRepository;
 import bg.softuni.mobilele.service.OfferService;
 import java.util.List;
 import org.springframework.stereotype.Service;
@@ -13,14 +14,21 @@ import org.springframework.stereotype.Service;
 public class OfferServiceImpl implements OfferService {
 
   private final OfferRepository offerRepository;
+  private final UserRepository userRepository;
 
-  public OfferServiceImpl(OfferRepository offerRepository) {
+  public OfferServiceImpl(OfferRepository offerRepository,
+      UserRepository userRepository) {
     this.offerRepository = offerRepository;
+    this.userRepository = userRepository;
   }
 
   @Override
-  public long createOffer(AddOfferDTO addOfferDTO) {
-    return offerRepository.save(map(addOfferDTO)).getId();
+  public long createOffer(AddOfferDTO addOfferDTO, String sellerEmail) {
+
+    OfferEntity offerEntity = map(addOfferDTO);
+    offerEntity.setSeller(userRepository.findByEmail(sellerEmail).orElseThrow(() -> new RuntimeException("No seller!")));
+
+    return offerRepository.save(offerEntity).getId();
   }
 
   @Override
@@ -61,7 +69,8 @@ public class OfferServiceImpl implements OfferService {
         offerEntity.getDescription(),
         offerEntity.getMileage(),
         offerEntity.getEngine(),
-        offerEntity.getPrice());
+        offerEntity.getPrice(),
+        offerEntity.getSellerFullName());
   }
 
   private static OfferEntity map(AddOfferDTO addOfferDTO) {
