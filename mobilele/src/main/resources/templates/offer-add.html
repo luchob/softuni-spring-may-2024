@@ -37,12 +37,17 @@
                 </p>
             </div>
             <div class="form-group col-md-6 mb-3">
-                <label for="price" class="text-white font-weight-bold">Price</label>
-                <input id="price" type="number" min="0" step="100" class="form-control"
-                       placeholder="Suggested price"/>
-                <p  class="errors alert alert-danger">
-                    Suggested price is required.
+                <label th:for="price" class="text-white font-weight-bold">Price (BGN)</label>
+                <input
+                    th:field="*{price}"
+                       type="number"
+                       th:errorclass="is-invalid"
+                       class="form-control"
+                       placeholder="Price in BGN"/>
+                <p class="invalid-feedback errors alert alert-danger">
+                    Valid mileage in kilometers is required.
                 </p>
+
             </div>
         </div>
         <div class="row">

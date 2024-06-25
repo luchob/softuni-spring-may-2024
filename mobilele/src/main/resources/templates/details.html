@@ -30,14 +30,24 @@
             <ul class="offer-details list-group list-group-flush">
                 <li class="list-group-item">
                     <div class="card-text">• Mileage <span th:text="*{mileage}">Mileage</span></div>
-                    <div class="card-text"><span>Price</span></div>
+                    <div class="card-text">• Price <span id="price" th:text="*{price}">Price</span></div>
                     <div class="card-text">• Engine type <span th:text="*{engineType}">Engine type</span></div>
                     <div class="card-text"><span>• Transmission type</span></div>
-                    <div class="card-text"><span>• Offer created</span></div>
-                    <div class="card-text"><span>• Offer modified</span></div>
-                    <div class="card-text"><span>• Seller - First and Last name</span></div>
+                    <div class="card-text">• Currency
+                        <select id="currency">
+                            <option
+                                th:each="currency : *{allCurrencies}"
+                                th:value="${currency}"
+                                th:selected="${currency} == 'BGN'"
+                                th:text="${currency}"
+                            >
+
+                            </option>
+                        </select>
+                    </div>
                 </li>
             </ul>
+            <input type="hidden" id="priceInBGN" th:value="*{price}">
             <div class="card-body">
                 <a class="card-link" href="/">Update</a>
                 <form th:method="delete"
@@ -53,9 +63,7 @@
     </div>
 </div>
 
-<div>
-             <footer> </footer>
-</div>
+<script th:src="@{/js/currency.js}"></script>
 
 </body>
 </html>

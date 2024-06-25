@@ -1,8 +1,8 @@
 package bg.softuni.mobilele.service;
 
-import bg.softuni.mobilele.model.AddOfferDTO;
-import bg.softuni.mobilele.model.OfferDetailsDTO;
-import bg.softuni.mobilele.model.OfferSummaryDTO;
+import bg.softuni.mobilele.model.dto.AddOfferDTO;
+import bg.softuni.mobilele.model.dto.OfferDetailsDTO;
+import bg.softuni.mobilele.model.dto.OfferSummaryDTO;
 import java.util.List;
 
 public interface OfferService {

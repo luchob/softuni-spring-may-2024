@@ -1,4 +1,4 @@
-package bg.softuni.mobilele.model;
+package bg.softuni.mobilele.model.dto;
 
 import bg.softuni.mobilele.model.enums.EngineTypeEnum;
 
