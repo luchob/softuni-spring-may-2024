@@ -11,29 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/users")
 public class LoginController {
 
-  private final UserService userService;
-
-  public LoginController(UserService userService) {
-    this.userService = userService;
-  }
-
   @GetMapping("/login")
   public String login() {
     return "auth-login";
-  }
-
-  @PostMapping("/login")
-  public String login(UserLoginDTO userLoginDTO) {
-    userService.login(userLoginDTO);
-
-    return "redirect:/";
-  }
-
-  @PostMapping("/logout")
-  public String logout() {
-
-    userService.logout();
-
-    return "redirect:/";
   }
 }

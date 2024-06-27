@@ -2,7 +2,13 @@ package bg.softuni.mobilele.model.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -15,6 +21,16 @@ public class UserEntity extends BaseEntity {
   private String firstName;
 
   private String lastName;
+
+  @ManyToMany(
+      fetch = FetchType.EAGER
+  )
+  @JoinTable(
+      name = "users_roles",
+      joinColumns = @JoinColumn(name = "user_id"),
+      inverseJoinColumns = @JoinColumn(name = "role_id")
+  )
+  private List<UserRoleEntity> roles = new ArrayList<>();
 
   public String getEmail() {
     return email;
@@ -52,13 +68,23 @@ public class UserEntity extends BaseEntity {
     return this;
   }
 
+  public List<UserRoleEntity> getRoles() {
+    return roles;
+  }
+
+  public UserEntity setRoles(List<UserRoleEntity> roles) {
+    this.roles = roles;
+    return this;
+  }
+
   @Override
   public String toString() {
     return "UserEntity{" +
         "email='" + email + '\'' +
-        ", password='" + (password != null ? "N/A" : "[PROVIDED]") + '\'' +
+        ", password='" + password + '\'' +
         ", firstName='" + firstName + '\'' +
         ", lastName='" + lastName + '\'' +
+        ", roles=" + roles +
         '}';
   }
 }
