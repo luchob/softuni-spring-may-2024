@@ -58,9 +58,9 @@ public class OfferController {
     }
 
 
-    long newOfferId = offerService.createOffer(addOfferDTO);
+    offerService.createOffer(addOfferDTO);
 
-    return "redirect:/offers/" + newOfferId;
+    return "redirect:/offers/all";
   }
 
   @GetMapping("/{id}")
