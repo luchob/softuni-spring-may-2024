@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>MobiLeLeLe</title>
+  <link rel="stylesheet" href="/css/reset-css.css"/>
+  <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+  <link rel="stylesheet" type="text/css" href="/css/main.css"/>
+  <script src="/js/jquery-3.5.1.slim.min.js"></script>
+  <script src="/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+<div th:replace="~{fragments/navbar::navbar(activeLink=${'home'})}"></div>
+
+
+<div class="container-fluid">
+  <h5 class="text-center text-white mt-5">Opps! Object with id <th:block th:text="${objectId}">1</th:block> was not found!</h5>
+</div>
+
+<div class="text-center text-white mt-5">We are sorry! Please navigate to <a th:href="@{/}">home page</a>...</div>
+
+<div>
+  <footer> </footer>
+</div>
+
+</body>
+</html>

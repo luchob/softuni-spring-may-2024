@@ -2,6 +2,7 @@ package bg.softuni.mobilele.web;
 
 import bg.softuni.mobilele.model.dto.UserRegistrationDTO;
 import bg.softuni.mobilele.service.UserService;
+import bg.softuni.mobilele.service.exception.ObjectNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;

@@ -5,7 +5,8 @@ import bg.softuni.mobilele.model.dto.ExRatesDTO;
 import bg.softuni.mobilele.model.entity.ExRateEntity;
 import bg.softuni.mobilele.repository.ExRateRepository;
 import bg.softuni.mobilele.service.ExRateService;
-import bg.softuni.mobilele.service.ObjectNotFoundException;
+import bg.softuni.mobilele.service.exception.ApiObjectNotFoundException;
+import bg.softuni.mobilele.service.exception.ObjectNotFoundException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
@@ -109,7 +110,7 @@ public class ExRateServiceImpl implements ExRateService {
   @Override
   public BigDecimal convert(String from, String to, BigDecimal amount) {
     return findExRate(from, to)
-        .orElseThrow(() -> new ObjectNotFoundException("Conversion from " + from + " to " + to + " not possible!"))
+        .orElseThrow(() -> new ApiObjectNotFoundException("Conversion from " + from + " to " + to + " not possible!", from + "~" + to))
         .multiply(amount);
   }
 }

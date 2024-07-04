@@ -7,6 +7,7 @@ import bg.softuni.mobilele.model.entity.OfferEntity;
 import bg.softuni.mobilele.repository.OfferRepository;
 import bg.softuni.mobilele.service.ExRateService;
 import bg.softuni.mobilele.service.OfferService;
+import bg.softuni.mobilele.service.exception.ObjectNotFoundException;
 import java.util.List;
 import org.springframework.stereotype.Service;
 
@@ -38,7 +39,7 @@ public class OfferServiceImpl implements OfferService {
     return this.offerRepository
         .findById(id)
         .map(this::toOfferDetails)
-        .orElseThrow();
+        .orElseThrow(() -> new ObjectNotFoundException("Offer not found!", id));
   }
 
   @Override
