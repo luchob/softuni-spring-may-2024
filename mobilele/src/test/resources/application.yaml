@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: mobilele
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    defer-datasource-initialization: true
+  sql:
+    init:
+      mode: never
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
+
+forex:
+  api:
+    key: test
+    url: "/test-currencies"
+    base: "USD"
+

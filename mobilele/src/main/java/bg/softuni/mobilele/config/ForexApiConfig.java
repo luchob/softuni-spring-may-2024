@@ -12,6 +12,7 @@ public class ForexApiConfig {
   private String key;
   private String url;
   private String base;
+  private boolean initExchangeRates;
 
   public String getKey() {
     return key;
@@ -51,13 +52,20 @@ public class ForexApiConfig {
       throw new IllegalStateException("Sorry, but the free API does not support base, "
           + "currencies different than USD.");
     }
-
-
   }
 
   private static void verifyNotNullOrEmpty(String name, String value) {
     if (value == null || value.isBlank()) {
       throw new IllegalArgumentException("Property " + name + " cannot be empty.");
     }
+  }
+
+  public boolean isInitExchangeRates() {
+    return initExchangeRates;
+  }
+
+  public ForexApiConfig setInitExchangeRates(boolean initExchangeRates) {
+    this.initExchangeRates = initExchangeRates;
+    return this;
   }
 }

@@ -23,7 +23,7 @@ public class SecurityConfig {
                     // all static resources to "common locations" (css, images, js) are available to anyone
                     .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                     // some more resources for all users
-                    .requestMatchers("/", "/users/login", "/users/register").permitAll()
+                    .requestMatchers("/", "/users/login", "/users/register", "/test", "/error").permitAll()
                     // all other URL-s should be authenticated.
                     .anyRequest()
                     .authenticated()
@@ -50,6 +50,12 @@ public class SecurityConfig {
                     .logoutSuccessUrl("/")
                     // invalidate the session after logout.
                     .invalidateHttpSession(true)
+        )
+        .exceptionHandling(
+            exceptionHandling ->
+                exceptionHandling
+                    // where to go if the user is not authorized?
+                    .accessDeniedPage("/error")
         )
         .build();
   }

@@ -25,7 +25,8 @@ public class RegistrationController {
 
   @GetMapping("/register")
   public String register() {
-    return "auth-register";
+    throw new IllegalArgumentException("Test exception");
+    //return "auth-register";
   }
 
   @PostMapping("/register")

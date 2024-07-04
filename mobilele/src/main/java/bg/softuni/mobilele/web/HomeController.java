@@ -1,6 +1,7 @@
 package bg.softuni.mobilele.web;
 
 import bg.softuni.mobilele.model.user.MobileleUserDetails;
+import bg.softuni.mobilele.repository.UserRepository;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,7 @@ public class HomeController {
 
     if (userDetails instanceof MobileleUserDetails mobileleUserDetails) {
       model.addAttribute("welcomeMessage", mobileleUserDetails.getFullName());
+
     } else {
       model.addAttribute("welcomeMessage", "Anonymous");
     }

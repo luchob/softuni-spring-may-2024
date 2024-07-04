@@ -33,3 +33,15 @@ forex:
     key: ${FOREX_API_KEY:}
     url: "https://openexchangerates.org/api/latest.json?app_id={app_id}"
     base: "USD"
+    init-exchange-rates: true
+
+server:
+  error:
+    include-message: always
+
+
+logging:
+  level:
+    org.springframework.security: DEBUG
+#    org.hibernate.SQL: DEBUG
+#    org.hibernate.orm.jdbc.bind: TRACE
