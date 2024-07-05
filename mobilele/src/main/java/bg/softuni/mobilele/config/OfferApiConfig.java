@@ -4,7 +4,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@ConfigurationProperties(prefix = "order.api")
+@ConfigurationProperties(prefix = "offer.api")
 public class OfferApiConfig {
   private String baseUrl;
 

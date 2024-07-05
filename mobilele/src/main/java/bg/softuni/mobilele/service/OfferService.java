@@ -9,7 +9,7 @@ public interface OfferService {
 
   void createOffer(AddOfferDTO addOfferDTO);
 
-  void deleteOffer(long orderId);
+  void deleteOffer(long offerId);
 
   OfferDetailsDTO getOfferDetails(Long id);
 

@@ -49,8 +49,8 @@ public class OfferServiceImpl implements OfferService {
   }
 
   @Override
-  public void deleteOffer(long orderId) {
-    offerRepository.deleteById(orderId);
+  public void deleteOffer(long offerId) {
+    offerRepository.deleteById(offerId);
   }
 
   @Override

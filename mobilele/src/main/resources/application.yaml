@@ -34,6 +34,6 @@ forex:
     url: "https://openexchangerates.org/api/latest.json?app_id={app_id}"
     base: "USD"
 
-orders:
+offers:
   api:
     baseUrl: "http://localhost:8081"
