@@ -7,6 +7,7 @@ import bg.softuni.mobilele.repository.ExRateRepository;
 import bg.softuni.mobilele.service.ExRateService;
 import bg.softuni.mobilele.service.exception.ApiObjectNotFoundException;
 import bg.softuni.mobilele.service.exception.ObjectNotFoundException;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
@@ -16,7 +17,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.ResponseErrorHandler;
 import org.springframework.web.client.RestClient;
 
 @Service
