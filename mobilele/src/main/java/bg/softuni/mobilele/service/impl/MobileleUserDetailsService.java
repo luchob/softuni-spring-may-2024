@@ -5,6 +5,7 @@ import bg.softuni.mobilele.model.enums.UserRoleEnum;
 import bg.softuni.mobilele.model.user.MobileleUserDetails;
 import bg.softuni.mobilele.model.entity.UserEntity;
 import bg.softuni.mobilele.repository.UserRepository;
+import java.time.LocalDateTime;
 import java.util.List;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

@@ -81,9 +81,7 @@ public class ExRateServiceImpl implements ExRateService {
       exRateRepository.save(exRateEntity);
     });
   }
-
-  @Override
-  public Optional<BigDecimal> findExRate(String from, String to) {
+  private Optional<BigDecimal> findExRate(String from, String to) {
 
     if (Objects.equals(from, to)) {
       return Optional.of(BigDecimal.ONE);

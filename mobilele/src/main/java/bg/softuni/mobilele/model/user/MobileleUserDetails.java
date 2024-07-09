@@ -1,5 +1,6 @@
 package bg.softuni.mobilele.model.user;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;

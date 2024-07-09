@@ -14,7 +14,5 @@ public interface ExRateService {
 
   void updateRates(ExRatesDTO exRatesDTO);
 
-  Optional<BigDecimal> findExRate(String from, String to);
-
   BigDecimal convert(String from, String to, BigDecimal amount);
 }
