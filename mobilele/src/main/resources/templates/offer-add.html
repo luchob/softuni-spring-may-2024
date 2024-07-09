@@ -113,11 +113,7 @@
                 rows="3"
                 placeholder="Description">
             </textarea>
-            <p class="invalid-feedback errors alert alert-danger">
-                Description is required and should be at least 5 symbols.
-            </p>
-
-<!--            <small th:each="err : ${#fields.errors('description')}" th:text="${err}" class="text-danger"></small>-->
+            <small th:each="err : ${#fields.errors('description')}" th:text="${err}" class="text-danger"></small>
 
 <!--            Alternative error display-->
 <!--            <small th:errors="*{description}" class="text-danger">Description error-->
