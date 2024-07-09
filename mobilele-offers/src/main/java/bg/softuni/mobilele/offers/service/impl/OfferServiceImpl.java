@@ -6,6 +6,8 @@ import bg.softuni.mobilele.offers.model.entity.OfferEntity;
 import bg.softuni.mobilele.offers.repository.OfferRepository;
 import bg.softuni.mobilele.offers.service.OfferService;
 import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -18,8 +20,8 @@ public class OfferServiceImpl implements OfferService {
   }
 
   @Override
-  public void createOffer(AddOfferDTO addOfferDTO) {
-    offerRepository.save(map(addOfferDTO));
+  public OfferDTO createOffer(AddOfferDTO addOfferDTO) {
+    return map(offerRepository.save(map(addOfferDTO)));
   }
 
   @Override
@@ -36,12 +38,10 @@ public class OfferServiceImpl implements OfferService {
   }
 
   @Override
-  public List<OfferDTO> getAllOffers() {
+  public Page<OfferDTO> getAllOffers(Pageable pageable) {
     return offerRepository
-        .findAll()
-        .stream()
-        .map(OfferServiceImpl::map)
-        .toList();
+        .findAll(pageable)
+        .map(OfferServiceImpl::map);
   }
 
   private static OfferDTO map(OfferEntity offerEntity) {

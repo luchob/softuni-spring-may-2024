@@ -4,7 +4,7 @@ import bg.softuni.mobilele.service.ExRateService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-@Component
+//@Component
 public class ExchangeRateInitializer implements CommandLineRunner {
 
   private final ExRateService exRateService;

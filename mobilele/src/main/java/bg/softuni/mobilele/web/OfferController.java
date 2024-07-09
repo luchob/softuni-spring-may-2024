@@ -1,6 +1,7 @@
 package bg.softuni.mobilele.web;
 
 import bg.softuni.mobilele.model.dto.AddOfferDTO;
+import bg.softuni.mobilele.model.dto.OfferDetailsDTO;
 import bg.softuni.mobilele.model.enums.EngineTypeEnum;
 import bg.softuni.mobilele.service.OfferService;
 import bg.softuni.mobilele.service.exception.ObjectNotFoundException;
@@ -57,10 +58,9 @@ public class OfferController {
       return "redirect:/offers/add";
     }
 
+    OfferDetailsDTO offerDetailsDTO = offerService.createOffer(addOfferDTO);
 
-    offerService.createOffer(addOfferDTO);
-
-    return "redirect:/offers/all";
+    return "redirect:/offers/" + offerDetailsDTO.id();
   }
 
   @GetMapping("/{id}")
