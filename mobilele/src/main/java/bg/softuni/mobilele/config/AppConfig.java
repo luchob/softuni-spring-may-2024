@@ -12,14 +12,6 @@ import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
 public class AppConfig {
 
   @Bean
-  public MessageSource messageSource() {
-    ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
-    messageSource.setBasename("classpath:i18n/messages");
-    messageSource.setDefaultEncoding("UTF-8");// todo: check if utf-8 is finally default
-    return messageSource;
-  }
-
-  @Bean
   public ModelMapper modelMapper() {
     return new ModelMapper();
   }
