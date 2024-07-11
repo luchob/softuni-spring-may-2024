@@ -1,0 +1,10 @@
+### Send POST request with json body
+POST http://localhost:8081/offers
+Content-Type: application/json
+
+{
+  "description": "Test offer 2",
+  "mileage": 20000,
+  "price": 220,
+  "engineType": "DIESEL"
+}

@@ -1,5 +1,6 @@
 package bg.softuni.mobilele.service.impl;
 
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -69,6 +70,7 @@ public class UserServiceImplTest {
 
     UserEntity actualSavedEntity = userEntityCaptor.getValue();
 
+    Assertions.assertNotNull(actualSavedEntity);
     Assertions.assertEquals(userRegistrationDTO.getFirstName(), actualSavedEntity.getFirstName());
     Assertions.assertEquals(userRegistrationDTO.getLastName(), actualSavedEntity.getLastName());
     Assertions.assertEquals(userRegistrationDTO.getPassword() + userRegistrationDTO.getPassword(),

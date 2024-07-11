@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @RestController
 @RequestMapping("/offers")
@@ -27,7 +28,7 @@ public class OfferController {
   }
 
   @GetMapping("/{id}")
-  public ResponseEntity<OfferDTO> findById(@PathVariable("id") Long id) {
+  public ResponseEntity<OfferDTO> getById(@PathVariable("id") Long id) {
     return ResponseEntity
         .ok(offerService.getOfferById(id));
   }
@@ -35,7 +36,9 @@ public class OfferController {
   @DeleteMapping("/{id}")
   public ResponseEntity<OfferDTO> deleteById(@PathVariable("id") Long id) {
     offerService.deleteOffer(id);
-    return ResponseEntity.ok().build();
+    return ResponseEntity
+        .noContent()
+        .build();
   }
 
   @GetMapping
@@ -51,8 +54,15 @@ public class OfferController {
   ) {
     LOGGER.info("Going to create an offer {}", addOfferDTO);
 
-    offerService.createOffer(addOfferDTO);
-    return ResponseEntity.ok().build();
+    OfferDTO offerDTO = offerService.createOffer(addOfferDTO);
+    return ResponseEntity.
+        created(
+            ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(offerDTO.id())
+                .toUri()
+        ).body(offerDTO);
   }
 
 }
