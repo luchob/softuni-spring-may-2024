@@ -3,6 +3,7 @@ package bg.softuni.mobilele.web;
 import bg.softuni.mobilele.model.dto.ConversionResultDTO;
 import bg.softuni.mobilele.service.ExRateService;
 import bg.softuni.mobilele.service.exception.ApiObjectNotFoundException;
+import bg.softuni.mobilele.web.aop.WarnIfExecutionExceeds;
 import java.math.BigDecimal;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +23,8 @@ public class CurrencyController {
     this.exRateService = exRateService;
   }
 
+
+  @WarnIfExecutionExceeds(timeInMillis = 1000)
   @GetMapping("/api/convert")
   public ResponseEntity<ConversionResultDTO> convert(
       @RequestParam("from") String from,
