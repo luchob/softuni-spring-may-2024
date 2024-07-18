@@ -17,10 +17,7 @@ public class MonitoringAspect {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(MonitoringAspect.class);
 
-  @Pointcut("@annotation(WarnIfExecutionExceeds)")
-  void onWarnIfExecutionTimeExceeds(){}
-
-  @Around("onWarnIfExecutionTimeExceeds()")
+  @Around("Pointcuts.onWarnIfExecutionTimeExceeds()")
   Object monitorExecutionTime(ProceedingJoinPoint pjp) throws Throwable {
     WarnIfExecutionExceeds annotation = getAnnotation(pjp);
     long threshold = annotation.threshold();

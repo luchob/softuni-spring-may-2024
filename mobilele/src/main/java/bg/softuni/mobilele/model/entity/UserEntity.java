@@ -1,5 +1,7 @@
 package bg.softuni.mobilele.model.entity;
 
+import static org.hibernate.type.SqlTypes.VARCHAR;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -9,12 +11,18 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
+import org.hibernate.annotations.JdbcType;
+import org.hibernate.annotations.JdbcTypeCode;
 
 @Entity
 @Table(name = "users")
 public class UserEntity extends BaseEntity {
   @Column(unique = true)
   private String email;
+  @UUIDSequence
+  @JdbcTypeCode(VARCHAR)
+  private UUID uuid;
 
   private String password;
 
@@ -74,6 +82,15 @@ public class UserEntity extends BaseEntity {
 
   public UserEntity setRoles(List<UserRoleEntity> roles) {
     this.roles = roles;
+    return this;
+  }
+
+  public UUID getUuid() {
+    return uuid;
+  }
+
+  public UserEntity setUuid(UUID uuid) {
+    this.uuid = uuid;
     return this;
   }
 
