@@ -13,6 +13,8 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.data.web.PagedModel;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -47,27 +49,24 @@ public class OfferController {
   }
 
   @GetMapping
-  public ResponseEntity<ErrorDTO> getAllOffers(@PageableDefault(
+  public ResponseEntity<PagedModel<OfferDTO>> getAllOffers(@PageableDefault(
       size = 3,
       sort = "id",
       direction = Direction.ASC
   ) Pageable pageable) {
-
     return ResponseEntity.ok(
-        new ErrorDTO("Not implemented", "1111")
+        new PagedModel<>(offerService.getAllOffers(pageable))
     );
-//    return ResponseEntity.ok(
-//        new PagedModel<>(offerService.getAllOffers(pageable))
-//    );
   }
 
   @PostMapping
   public ResponseEntity<OfferDTO> createOffer(
-      @RequestBody AddOfferDTO addOfferDTO
+      @RequestBody AddOfferDTO addOfferDTO,
+      @AuthenticationPrincipal UserDetails userDetails
   ) {
     LOGGER.info("Going to create an offer {}", addOfferDTO);
 
-    OfferDTO offerDTO = offerService.createOffer(addOfferDTO);
+    OfferDTO offerDTO = offerService.createOffer(addOfferDTO, userDetails.getUsername());
     return ResponseEntity.created(
         ServletUriComponentsBuilder
             .fromCurrentRequest()

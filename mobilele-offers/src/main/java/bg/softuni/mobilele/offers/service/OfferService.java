@@ -8,7 +8,7 @@ import org.springframework.data.domain.Pageable;
 
 public interface OfferService {
 
-  OfferDTO createOffer(AddOfferDTO addOfferDTO);
+  OfferDTO createOffer(AddOfferDTO addOfferDTO, String userId);
 
   void deleteOffer(Long offerId);
 

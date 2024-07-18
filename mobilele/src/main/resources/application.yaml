@@ -33,7 +33,12 @@ forex:
     key: ${FOREX_API_KEY:}
     url: "https://openexchangerates.org/api/latest.json?app_id={app_id}"
     base: "USD"
+  init-exchange-rates: false
 
 offers:
   api:
     baseUrl: "http://localhost:8081"
+
+jwt:
+  secret: N2NuZ0NIM0FZbWpReTJ4Tzc1WHdTRWJNaFBOajdYTUQ=
+  expiration: 6000000

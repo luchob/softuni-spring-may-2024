@@ -2,6 +2,7 @@ package bg.softuni.mobilele.offers.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -30,7 +31,7 @@ public class SecurityConfig {
         .authorizeHttpRequests(
             authorizeHttpRequests ->
                 authorizeHttpRequests
-                    .requestMatchers("/**").permitAll()
+                    .requestMatchers(HttpMethod.GET,"/offers/**").permitAll()
                     .anyRequest().authenticated()
         )
         .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);

@@ -21,6 +21,9 @@ public class OfferEntity  {
   @NotEmpty
   private String description;
 
+  @NotEmpty
+  private String userId;
+
   @Positive
   private Integer mileage;
 
@@ -72,6 +75,15 @@ public class OfferEntity  {
 
   public OfferEntity setId(Long id) {
     this.id = id;
+    return this;
+  }
+
+  public String getUserId() {
+    return userId;
+  }
+
+  public OfferEntity setUserId(String userId) {
+    this.userId = userId;
     return this;
   }
 }
