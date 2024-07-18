@@ -14,13 +14,15 @@ import java.util.List;
 import java.util.UUID;
 import org.hibernate.annotations.JdbcType;
 import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.annotations.UuidGenerator;
 
 @Entity
 @Table(name = "users")
 public class UserEntity extends BaseEntity {
   @Column(unique = true)
   private String email;
-  @UUIDSequence
+  @UuidGenerator
+  //@UUIDSequence <-- applicable for all kind of identifiers
   @JdbcTypeCode(VARCHAR)
   private UUID uuid;
 

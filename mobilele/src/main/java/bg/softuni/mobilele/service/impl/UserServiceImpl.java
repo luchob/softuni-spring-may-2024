@@ -3,9 +3,13 @@ package bg.softuni.mobilele.service.impl;
 import bg.softuni.mobilele.model.dto.UserLoginDTO;
 import bg.softuni.mobilele.model.dto.UserRegistrationDTO;
 import bg.softuni.mobilele.model.entity.UserEntity;
+import bg.softuni.mobilele.model.user.MobileleUserDetails;
 import bg.softuni.mobilele.repository.UserRepository;
 import bg.softuni.mobilele.service.UserService;
+import java.util.Optional;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +31,16 @@ public class UserServiceImpl implements UserService {
   @Override
   public void registerUser(UserRegistrationDTO userRegistration) {
     userRepository.save(map(userRegistration));
+  }
+
+  @Override
+  public Optional<MobileleUserDetails> getCurrentUser() {
+    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    if (authentication != null &&
+          authentication.getPrincipal() instanceof MobileleUserDetails mobileleUserDetails) {
+      return Optional.of(mobileleUserDetails);
+    }
+    return Optional.empty();
   }
 
   private UserEntity map(UserRegistrationDTO userRegistrationDTO) {
