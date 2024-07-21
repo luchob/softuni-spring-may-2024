@@ -3,13 +3,19 @@ package bg.softuni.mobilele.offers.service.impl;
 import bg.softuni.mobilele.offers.model.dto.AddOfferDTO;
 import bg.softuni.mobilele.offers.model.dto.OfferDTO;
 import bg.softuni.mobilele.offers.model.entity.OfferEntity;
+import bg.softuni.mobilele.offers.model.enums.UserRoleEnum;
 import bg.softuni.mobilele.offers.repository.OfferRepository;
 import bg.softuni.mobilele.offers.service.OfferService;
 import bg.softuni.mobilele.offers.service.exception.ObjectNotFoundException;
 import java.util.List;
+import java.util.Objects;
+import java.util.UUID;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
-@Service
+@Service(
+    value = "offerService"
+)
 public class OfferServiceImpl implements OfferService {
 
   private final OfferRepository offerRepository;
@@ -44,6 +50,26 @@ public class OfferServiceImpl implements OfferService {
         .stream()
         .map(OfferServiceImpl::map)
         .toList();
+  }
+
+  @Override
+  public boolean isOwner(Long offerId, UserDetails userDetails) {
+
+    boolean isAdmin =
+        userDetails
+            .getAuthorities()
+            .stream()
+            .anyMatch(a -> Objects.equals(a.getAuthority(), "ROLE_" + UserRoleEnum.ADMIN));
+
+    if (isAdmin) {
+      return true;
+    }
+
+    return offerRepository
+        .findById(offerId)
+        .filter(o -> Objects.equals(o.getUuid().toString(), userDetails.getUsername()))
+        .isPresent();
+
   }
 
   private static OfferDTO map(OfferEntity offerEntity) {

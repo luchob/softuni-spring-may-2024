@@ -4,8 +4,6 @@ import bg.softuni.mobilele.model.dto.AddOfferDTO;
 import bg.softuni.mobilele.model.dto.ExRatesDTO;
 import bg.softuni.mobilele.model.dto.OfferDetailsDTO;
 import bg.softuni.mobilele.model.dto.OfferSummaryDTO;
-import bg.softuni.mobilele.model.entity.OfferEntity;
-import bg.softuni.mobilele.repository.OfferRepository;
 import bg.softuni.mobilele.service.ExRateService;
 import bg.softuni.mobilele.service.OfferService;
 import bg.softuni.mobilele.service.exception.ObjectNotFoundException;
@@ -23,16 +21,12 @@ public class OfferServiceImpl implements OfferService {
 
   private Logger LOGGER = LoggerFactory.getLogger(OfferServiceImpl.class);
   private final RestClient offerRestClient;
-  private final OfferRepository offerRepository;
   private final ExRateService exRateService;
 
   public OfferServiceImpl(
       @Qualifier("offersRestClient") RestClient offerRestClient,
-      OfferRepository offerRepository,
-
       ExRateService exRateService) {
     this.offerRestClient = offerRestClient;
-    this.offerRepository = offerRepository;
     this.exRateService = exRateService;
   }
 
@@ -40,17 +34,22 @@ public class OfferServiceImpl implements OfferService {
   public void createOffer(AddOfferDTO addOfferDTO) {
     LOGGER.info("Creating new offer...");
 
-    // todo - fix baseUrl.
     offerRestClient
         .post()
-        .uri("http://localhost:8081/offers")
+        .uri("/offers")
         .body(addOfferDTO)
         .retrieve();
   }
 
   @Override
   public void deleteOffer(long offerId) {
-    offerRepository.deleteById(offerId);
+    LOGGER.info("Delete offer...");
+
+    offerRestClient
+        .delete()
+        .uri("/offers/{id}", offerId)
+        .accept(MediaType.APPLICATION_JSON)
+        .retrieve();
   }
 
   @Override
@@ -58,7 +57,7 @@ public class OfferServiceImpl implements OfferService {
 
     return offerRestClient
         .get()
-        .uri("http://localhost:8081/offers/{id}", id)
+        .uri("/offers/{id}", id)
         .accept(MediaType.APPLICATION_JSON)
         .retrieve()
         .body(OfferDetailsDTO.class);
@@ -70,7 +69,7 @@ public class OfferServiceImpl implements OfferService {
 
     return offerRestClient
         .get()
-        .uri("http://localhost:8081/offers")
+        .uri("/offers")
         .accept(MediaType.APPLICATION_JSON)
         .retrieve()
         .body(new ParameterizedTypeReference<>(){});

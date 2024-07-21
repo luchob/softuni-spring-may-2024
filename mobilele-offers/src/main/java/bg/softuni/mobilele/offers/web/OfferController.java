@@ -7,6 +7,9 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,8 +36,10 @@ public class OfferController {
         .ok(offerService.getOfferById(id));
   }
 
+  @PreAuthorize("@offerService.isOwner(#id, #userDetails)")
   @DeleteMapping("/{id}")
-  public ResponseEntity<OfferDTO> deleteById(@PathVariable("id") Long id) {
+  public ResponseEntity<OfferDTO> deleteById(@PathVariable("id") Long id,
+      @AuthenticationPrincipal UserDetails userDetails) {
     offerService.deleteOffer(id);
     return ResponseEntity
         .noContent()
@@ -42,7 +47,12 @@ public class OfferController {
   }
 
   @GetMapping
-  public ResponseEntity<List<OfferDTO>> getAllOffers() {
+  public ResponseEntity<List<OfferDTO>> getAllOffers(@AuthenticationPrincipal UserDetails userDetails) {
+
+    if (userDetails != null) {
+      System.out.println("Logged in user: " + userDetails.getUsername());
+      System.out.println("Roles: " + userDetails.getAuthorities().stream().toList());
+    }
     return ResponseEntity.ok(
         offerService.getAllOffers()
     );

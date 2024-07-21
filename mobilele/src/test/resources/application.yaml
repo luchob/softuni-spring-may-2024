@@ -19,7 +19,17 @@ forex:
     key: test
     url: "http://example.com"
     base: "USD"
+  initialize-ex-rates: ${FOREX_INITIALIZE_EX_RATE:false}
 
 offers:
   api:
-    baseUrl: "http://localhost:8081"
+    baseUrl: ${OFFERS_BASE_URL:"http://localhost:8081"}
+
+jwt:
+  secret: ${JWT_KEY:WSdv1kEE1tCT1a8ihRSqfwMNzlPBq8IWSdv1kEE1tCT1a8ihRSqfwMNzlPBq8IWSdv1kEE1tCT1a8ihRSqfwMNzlPBq8I}
+  expiration: ${JWT_EXPIRATION:60000}
+
+logging:
+  level:
+    org.hibernate.SQL: DEBUG
+    org.hibernate.orm.jdbc.bind: TRACE

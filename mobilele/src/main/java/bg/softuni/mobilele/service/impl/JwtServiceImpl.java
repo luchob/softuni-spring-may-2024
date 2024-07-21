@@ -29,8 +29,8 @@ public class JwtServiceImpl implements JwtService {
 
     return Jwts
         .builder()
-        .setSubject(userId)
         .setClaims(claims)
+        .setSubject(userId)
         .setIssuedAt(now)
         .setNotBefore(now)
         .setExpiration(new Date(now.getTime() + expiration))

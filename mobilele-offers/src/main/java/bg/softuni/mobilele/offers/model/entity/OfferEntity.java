@@ -1,5 +1,7 @@
 package bg.softuni.mobilele.offers.model.entity;
 
+import static org.hibernate.type.SqlTypes.VARCHAR;
+
 import bg.softuni.mobilele.offers.model.enums.EngineTypeEnum;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -10,6 +12,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Positive;
+import java.util.UUID;
+import org.hibernate.annotations.JdbcTypeCode;
 
 @Entity
 @Table(name = "offers")
@@ -29,6 +33,9 @@ public class OfferEntity  {
 
   @Enumerated(EnumType.STRING)
   private EngineTypeEnum engine;
+
+  @JdbcTypeCode(VARCHAR)
+  private UUID uuid;
 
   public Integer getMileage() {
     return mileage;
@@ -72,6 +79,15 @@ public class OfferEntity  {
 
   public OfferEntity setId(Long id) {
     this.id = id;
+    return this;
+  }
+
+  public UUID getUuid() {
+    return uuid;
+  }
+
+  public OfferEntity setUuid(UUID uuid) {
+    this.uuid = uuid;
     return this;
   }
 }
