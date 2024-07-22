@@ -23,7 +23,7 @@ public class SecurityConfig {
         .csrf(AbstractHttpConfigurer::disable)
         .authorizeHttpRequests(
             authorize ->
-                authorize.requestMatchers(HttpMethod.GET, "/offers/**").permitAll()
+                authorize.requestMatchers(HttpMethod.GET, "/offers/**", "/swagger-ui/**", "/swagger-ui.html", "/v3/api-docs/**").permitAll()
                     .anyRequest().authenticated()
         )
         .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)

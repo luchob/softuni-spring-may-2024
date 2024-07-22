@@ -3,6 +3,7 @@ package bg.softuni.mobilele.offers.service;
 import bg.softuni.mobilele.offers.model.dto.AddOfferDTO;
 import bg.softuni.mobilele.offers.model.dto.OfferDTO;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import org.springframework.security.core.userdetails.UserDetails;
 

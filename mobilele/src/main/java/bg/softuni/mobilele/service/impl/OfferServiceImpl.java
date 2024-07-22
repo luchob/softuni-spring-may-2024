@@ -19,7 +19,7 @@ import org.springframework.web.client.RestClient;
 @Service
 public class OfferServiceImpl implements OfferService {
 
-  private Logger LOGGER = LoggerFactory.getLogger(OfferServiceImpl.class);
+  private final Logger LOGGER = LoggerFactory.getLogger(OfferServiceImpl.class);
   private final RestClient offerRestClient;
   private final ExRateService exRateService;
 

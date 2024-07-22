@@ -22,3 +22,11 @@ server:
 
 jwt:
   secret: ${JWT_KEY:WSdv1kEE1tCT1a8ihRSqfwMNzlPBq8IWSdv1kEE1tCT1a8ihRSqfwMNzlPBq8IWSdv1kEE1tCT1a8ihRSqfwMNzlPBq8I}
+
+springdoc:
+  writer-with-default-pretty-printer: true
+
+logging:
+  level:
+    org.hibernate.SQL: DEBUG
+    org.hibernate.orm.jdbc.bind: TRACE
