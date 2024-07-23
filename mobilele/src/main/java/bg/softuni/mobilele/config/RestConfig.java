@@ -43,11 +43,12 @@ public class RestConfig {
                 mud.getUuid().toString(),//
                 Map.of(
                     "roles",
-                    mud.getAuthorities().stream().map(GrantedAuthority::getAuthority).toList(),
-                    "user",
-                    mud.getUuid().toString()
+                    mud.getAuthorities().stream().map(GrantedAuthority::getAuthority).toList()
                 )
             );
+
+            System.out.println("BEARER TOKEN: " + bearerToken);
+
             r.getHeaders().setBearerAuth(bearerToken);
           });
 

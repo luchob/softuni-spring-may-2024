@@ -40,10 +40,9 @@ public class OfferServiceImpl implements OfferService {
   public void createOffer(AddOfferDTO addOfferDTO) {
     LOGGER.info("Creating new offer...");
 
-    // todo - fix baseUrl.
     offerRestClient
         .post()
-        .uri("http://localhost:8081/offers")
+        .uri("/offers")
         .body(addOfferDTO)
         .retrieve();
   }
@@ -58,7 +57,7 @@ public class OfferServiceImpl implements OfferService {
 
     return offerRestClient
         .get()
-        .uri("http://localhost:8081/offers/{id}", id)
+        .uri("/offers/{id}", id)
         .accept(MediaType.APPLICATION_JSON)
         .retrieve()
         .body(OfferDetailsDTO.class);
@@ -70,7 +69,7 @@ public class OfferServiceImpl implements OfferService {
 
     return offerRestClient
         .get()
-        .uri("http://localhost:8081/offers")
+        .uri("/offers")
         .accept(MediaType.APPLICATION_JSON)
         .retrieve()
         .body(new ParameterizedTypeReference<>(){});

@@ -5,7 +5,6 @@ plugins {
 }
 
 group = 'bg.softuni.mobilele'
-version = '0.0.1-SNAPSHOT'
 
 java {
 	toolchain {
@@ -24,6 +23,8 @@ dependencies {
 
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 
+	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0'
+
 	implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
 	implementation 'io.jsonwebtoken:jjwt-impl:0.11.5'
 	implementation 'io.jsonwebtoken:jjwt-jackson:0.11.5'
@@ -31,6 +32,7 @@ dependencies {
 	runtimeOnly 'com.mysql:mysql-connector-j'
 	testRuntimeOnly 'org.hsqldb:hsqldb'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.security:spring-security-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 

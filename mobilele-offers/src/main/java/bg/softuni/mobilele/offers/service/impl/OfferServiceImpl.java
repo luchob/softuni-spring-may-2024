@@ -7,6 +7,8 @@ import bg.softuni.mobilele.offers.repository.OfferRepository;
 import bg.softuni.mobilele.offers.service.OfferService;
 import bg.softuni.mobilele.offers.service.exception.ObjectNotFoundException;
 import java.util.List;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 @Service
