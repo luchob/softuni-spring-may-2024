@@ -1,6 +1,7 @@
 package bg.softuni.mobilele.offers.model.entity;
 
 import bg.softuni.mobilele.offers.model.enums.EngineTypeEnum;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -19,6 +20,7 @@ public class OfferEntity  {
   private Long id;
 
   @NotEmpty
+  @Column(columnDefinition = "TEXT")
   private String description;
 
   @Positive

@@ -11,3 +11,7 @@ spring:
   sql:
     init:
       mode: never
+
+
+jwt:
+  secret: test
