@@ -2,6 +2,7 @@ package bg.softuni.mobilele.offers.repository;
 
 import bg.softuni.mobilele.offers.model.entity.OfferEntity;
 import java.time.Instant;
+import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -15,5 +16,4 @@ public interface OfferRepository extends JpaRepository<OfferEntity, Long> {
   @Modifying
   @Query("DELETE FROM OfferEntity o WHERE o.created < :olderThan")
   void deleteOldOffers(Instant olderThan);
-
 }

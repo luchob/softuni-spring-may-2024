@@ -29,7 +29,7 @@ spring:
 
 forex:
   api:
-    key: ${FOREX_API_KEY:}
+    key: ${FOREX_API_KEY:test}
     url: "https://openexchangerates.org/api/latest.json?app_id={app_id}"
     base: "USD"
   init-ex-rates: ${INIT_EX_RATES:false}

@@ -12,6 +12,9 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PagedModel;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -49,12 +52,12 @@ public class OfferServiceImpl implements OfferService {
   }
 
   @Override
-  public List<OfferDTO> getAllOffers() {
-    return offerRepository
-        .findAll()
-        .stream()
+  public PagedModel<OfferDTO> getAllOffers(Pageable pageable) {
+
+    return new PagedModel<>(offerRepository
+        .findAll(pageable)
         .map(OfferServiceImpl::map)
-        .toList();
+    );
   }
 
   @Override
