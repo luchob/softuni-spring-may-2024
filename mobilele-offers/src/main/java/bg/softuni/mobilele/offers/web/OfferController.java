@@ -3,10 +3,12 @@ package bg.softuni.mobilele.offers.web;
 import bg.softuni.mobilele.offers.model.dto.AddOfferDTO;
 import bg.softuni.mobilele.offers.model.dto.OfferDTO;
 import bg.softuni.mobilele.offers.service.OfferService;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -69,6 +71,11 @@ public class OfferController {
         .ok(offerService.getOfferById(id));
   }
 
+  @Operation(
+      security = @SecurityRequirement(
+          name = "bearer-token"
+      )
+  )
   @DeleteMapping("/{id}")
   public ResponseEntity<OfferDTO> deleteById(@PathVariable("id") Long id) {
     offerService.deleteOffer(id);
@@ -84,6 +91,11 @@ public class OfferController {
     );
   }
 
+  @Operation(
+      security = @SecurityRequirement(
+          name = "bearer-token"
+      )
+  )
   @PostMapping
   public ResponseEntity<OfferDTO> createOffer(
       @RequestBody AddOfferDTO addOfferDTO

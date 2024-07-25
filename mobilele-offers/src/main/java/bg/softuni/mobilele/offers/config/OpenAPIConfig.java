@@ -17,7 +17,7 @@ public class OpenAPIConfig {
 
     openAPI.components(
         new Components()
-            .addSecuritySchemes("bearer-key",
+            .addSecuritySchemes("bearer-token",
                 new SecurityScheme()
                     .type(SecurityScheme.Type.HTTP)
                     .scheme("bearer")
