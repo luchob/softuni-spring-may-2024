@@ -14,4 +14,5 @@ public interface OfferService {
 
   List<OfferDTO> getAllOffers();
 
+  void cleanupOldOffers();
 }

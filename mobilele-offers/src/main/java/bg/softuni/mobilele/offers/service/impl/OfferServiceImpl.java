@@ -6,7 +6,12 @@ import bg.softuni.mobilele.offers.model.entity.OfferEntity;
 import bg.softuni.mobilele.offers.repository.OfferRepository;
 import bg.softuni.mobilele.offers.service.OfferService;
 import bg.softuni.mobilele.offers.service.exception.ObjectNotFoundException;
+import java.time.Instant;
+import java.time.Period;
 import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -14,10 +19,14 @@ import org.springframework.stereotype.Service;
 @Service
 public class OfferServiceImpl implements OfferService {
 
+  private final Logger LOGGER = LoggerFactory.getLogger(OfferService.class);
   private final OfferRepository offerRepository;
+  private final Period retentionPeriod;
 
-  public OfferServiceImpl(OfferRepository offerRepository) {
+  public OfferServiceImpl(OfferRepository offerRepository,
+      @Value("${offers.retention.period}") Period retentionPeriod) {
     this.offerRepository = offerRepository;
+    this.retentionPeriod = retentionPeriod;
   }
 
   @Override
@@ -46,6 +55,15 @@ public class OfferServiceImpl implements OfferService {
         .stream()
         .map(OfferServiceImpl::map)
         .toList();
+  }
+
+  @Override
+  public void cleanupOldOffers() {
+    Instant now = Instant.now();
+    Instant deleteBefore = now.minus(retentionPeriod);
+    LOGGER.info("Removing all offers older than " + deleteBefore);
+    offerRepository.deleteOldOffers(deleteBefore);
+    LOGGER.info("Old orders were removed");
   }
 
   private static OfferDTO map(OfferEntity offerEntity) {

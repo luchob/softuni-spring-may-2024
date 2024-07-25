@@ -10,7 +10,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
+import java.time.Instant;
 
 @Entity
 @Table(name = "offers")
@@ -20,7 +22,7 @@ public class OfferEntity  {
   private Long id;
 
   @NotEmpty
-  @Column(columnDefinition = "TEXT")
+  @Column(columnDefinition = "TEXT")//MYSQL Specific!!!!!, demonstrates test containers
   private String description;
 
   @Positive
@@ -31,6 +33,9 @@ public class OfferEntity  {
 
   @Enumerated(EnumType.STRING)
   private EngineTypeEnum engine;
+  @NotNull
+  @Column
+  private Instant created = Instant.now();
 
   public Integer getMileage() {
     return mileage;
@@ -74,6 +79,15 @@ public class OfferEntity  {
 
   public OfferEntity setId(Long id) {
     this.id = id;
+    return this;
+  }
+
+  public Instant getCreated() {
+    return created;
+  }
+
+  public OfferEntity setCreated(Instant created) {
+    this.created = created;
     return this;
   }
 }
