@@ -2,6 +2,7 @@ package bg.softuni.mobilele.config;
 
 import bg.softuni.mobilele.repository.UserRepository;
 import bg.softuni.mobilele.service.impl.MobileleUserDetailsService;
+import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,6 +25,7 @@ public class SecurityConfig {
                     .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                     // some more resources for all users
                     .requestMatchers("/", "/users/login", "/users/register", "/error", "/offers/all", "/offers/{id}", "/api/convert").permitAll()
+                    .requestMatchers(EndpointRequest.toAnyEndpoint()).permitAll()
                     // all other URL-s should be authenticated.
                     .anyRequest()
                     .authenticated()
