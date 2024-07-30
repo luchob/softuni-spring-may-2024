@@ -15,4 +15,6 @@ public interface ExRateService {
   void updateRates(ExRatesDTO exRatesDTO);
 
   BigDecimal convert(String from, String to, BigDecimal amount);
+
+  void publishExRates();
 }

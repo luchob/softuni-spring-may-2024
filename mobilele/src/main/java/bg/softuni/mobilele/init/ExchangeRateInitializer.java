@@ -3,8 +3,10 @@ package bg.softuni.mobilele.init;
 import bg.softuni.mobilele.service.ExRateService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
+@Order(0)
 @Component
 @ConditionalOnProperty(name = "forex.init-ex-rates", havingValue = "true")
 public class ExchangeRateInitializer implements CommandLineRunner {
