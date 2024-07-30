@@ -17,6 +17,7 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestClient;
 
 @Service
@@ -75,4 +76,5 @@ public class OfferServiceImpl implements OfferService {
         .retrieve()
         .body(new ParameterizedTypeReference<>(){});
   }
+
 }

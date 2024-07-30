@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PagedModel;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -47,9 +48,18 @@ public class OfferServiceImpl implements OfferService {
   }
 
   @Override
-  public void deleteOffer(Long offerId) {
+  @PreAuthorize("@offerServiceImpl.isOwner(#userDetails, #offerId)")
+  public void deleteOffer(UserDetails userDetails, Long offerId) {
     offerRepository.deleteById(offerId);
   }
+
+  @Override
+  public boolean isOwner(UserDetails userDetails, Long offerId) {
+    //
+    return true;
+  }
+
+
 
   @Override
   public PagedModel<OfferDTO> getAllOffers(Pageable pageable) {

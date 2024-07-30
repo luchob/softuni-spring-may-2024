@@ -24,7 +24,6 @@ public class OfferEntity  {
   @NotEmpty
   @Column(columnDefinition = "TEXT")//MYSQL Specific!!!!!, demonstrates test containers
   private String description;
-
   @Positive
   private Integer mileage;
 

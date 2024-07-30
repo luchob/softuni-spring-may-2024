@@ -86,8 +86,9 @@ public class OfferController {
       )
   )
   @DeleteMapping("/{id}")
-  public ResponseEntity<OfferDTO> deleteById(@PathVariable("id") Long id) {
-    offerService.deleteOffer(id);
+  public ResponseEntity<OfferDTO> deleteById(@PathVariable("id") Long id,
+      @AuthenticationPrincipal UserDetails userDetails) {
+    offerService.deleteOffer(userDetails, id);
     return ResponseEntity
         .noContent()
         .build();
