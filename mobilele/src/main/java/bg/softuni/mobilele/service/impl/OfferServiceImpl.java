@@ -4,6 +4,7 @@ import bg.softuni.mobilele.model.dto.AddOfferDTO;
 import bg.softuni.mobilele.model.dto.ExRatesDTO;
 import bg.softuni.mobilele.model.dto.OfferDetailsDTO;
 import bg.softuni.mobilele.model.dto.OfferSummaryDTO;
+import bg.softuni.mobilele.model.dto.PageData;
 import bg.softuni.mobilele.model.entity.OfferEntity;
 import bg.softuni.mobilele.repository.OfferRepository;
 import bg.softuni.mobilele.service.ExRateService;
@@ -14,6 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
@@ -65,12 +67,14 @@ public class OfferServiceImpl implements OfferService {
   }
 
   @Override
-  public List<OfferSummaryDTO> getAllOffersSummary() {
+  public PageData<OfferSummaryDTO> getAllOffersSummary(Pageable pageable) {
     LOGGER.info("Get all offers...");
 
     return offerRestClient
         .get()
-        .uri("/offers")
+        .uri("/offers?page={page}&size={size}&sort=id,desc",
+            pageable.getPageNumber(),
+            pageable.getPageSize())
         .accept(MediaType.APPLICATION_JSON)
         .retrieve()
         .body(new ParameterizedTypeReference<>(){});
